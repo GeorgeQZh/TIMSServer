@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/logo-icon.png}">
+    <title></title>
+    <!-- Bootstrap Core CSS -->
+    <link type="text/css" th:href="@{plugins/bootstrap/css/bootstrap.min.css}"
+          href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link type="text/css" th:href="@{plugins/chartist-js/dist/chartist.min.css}"
+          href="../static/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link type="text/css" th:href="@{plugins/chartist-js/dist/chartist-init.css}"
+          href="../static/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link type="text/css" th:href="@{plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css}"
+          href="../static/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link type="text/css" th:href="@{plugins/c3-master/c3.min.css}"
+          href="../static/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link type="text/css" th:href="@{css/style.css}"
+          href="../static/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link type="text/css" th:href="@{css/colors/blue.css}"
+          href="../static/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+
+
+        <header class="topbar" id="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{index}" href="index.html">
+                        <span>
+                         <img style="width: auto;height:60px" th:src="@{images/tims-logo1.png}"
+                              src="../static/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
+                    </a>
+                </div>
+
+                <div class="navbar-collapse">
+
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item">
+                            <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
+                                                 th:href="@{javascript:void(0)}" href="javascript:void(0)">
+                                <i class="mdi mdi-menu"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark">
+                                <img th:src="${#strings.isEmpty(session.loginUser)}?@{images/users/user.png}:@{images/users/1.jpg}"
+                                     src="../static/images/users/1.jpg" alt="user" class="profile-pic m-r-10" />
+
+                            </a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark"
+                               th:href="@{login}" th:text="${#strings.isEmpty(session.loginUser)}?'未登录':${session.loginUser}"
+                               href="login.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                未登录
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar" id="sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li>
+                            <a class="waves-effect waves-dark" th:href="@{index}"
+                               href="index.html" aria-expanded="false">
+                                <i class="mdi mdi-gauge"></i>
+                                <span class="hide-menu">主页</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" th:href="@{table}"
+                               href="../static/pages-profile.html" aria-expanded="false">
+                                <i class="mdi mdi-account-check"></i>
+                                <span class="hide-menu">DHCP识别</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" th:href="@{scan}"
+                               href="../static/table-basic.html" aria-expanded="false">
+                                <i class="mdi mdi-table"></i>
+                                <span class="hide-menu">主动扫描</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" th:href="@{icon-material}"
+                               href="../static/icon-material.html" aria-expanded="false">
+                                <i class="mdi mdi-emoticon"></i>
+                                <span class="hide-menu">权限管理</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" th:href="@{map-google}"
+                               href="../static/map-google.html" aria-expanded="false">
+                                <i class="mdi mdi-earth"></i>
+                                <span class="hide-menu">系统设置</span>
+                            </a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" th:href="@{pages-blank}"
+                                href="../static/pages-blank.html" aria-expanded="false">
+                            <i class="mdi mdi-book-open-variant"></i>
+                            <span class="hide-menu">Blank Page</span>
+                        </a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" th:href="@{pages-error-404}"
+                                href="../static/pages-error-404.html" aria-expanded="false">
+                            <i class="mdi mdi-help-circle"></i>
+                            <span class="hide-menu">帮助</span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+            <!-- Bottom points-->
+            <div class="sidebar-footer">
+                <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <a th:if="${#strings.isEmpty(session.loginUser)}" th:href="@{login}" href="" class="link" data-toggle="tooltip" title="Login">
+                    <i class="mdi mdi-gmail"></i>
+                </a>
+                <a th:href="@{logout}" href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+            <!-- End Bottom points-->
+        </aside>
+
+        <footer class="footer text-center" id="footer"> © 2019 USTC. </footer>
+
+    <script th:src="@{plugins/jquery/jquery.min.js}"
+            src="../static/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script th:src="@{plugins/bootstrap/js/tether.min.js}"
+            src="../static/plugins/bootstrap/js/tether.min.js"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.min.js}"
+            src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script th:src="@{js/jquery.slimscroll.js}"
+            src="../static/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script th:src="@{js/waves.js}"
+            src="../static/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script th:src="@{js/sidebarmenu.js}"
+            src="../static/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script th:src="@{plugins/sticky-kit-master/dist/sticky-kit.min.js}"
+            src="../static/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script th:src="@{js/custom.min.js}" src="../static/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- chartist chart -->
+    <script th:src="@{plugins/chartist-js/dist/chartist.min.js}"
+            src="../static/plugins/chartist-js/dist/chartist.min.js"></script>
+    <script th:src="@{plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js}"
+            src="../static/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!--c3 JavaScript -->
+    <script th:src="@{plugins/d3/d3.min.js}" src="../static/plugins/d3/d3.min.js"></script>
+    <script th:src="@{plugins/c3-master/c3.min.js}" src="../static/plugins/c3-master/c3.min.js"></script>
+    <!-- Chart JS -->
+    <script th:src="@{js/dashboard1.js}" src="../static/js/dashboard1.js"></script>
+</body>
+
+</html>
