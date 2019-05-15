@@ -13,7 +13,8 @@ import java.util.List;
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:
  */
-@XmlRootElement(name = "nmaprun")
+
+@XmlRootElement(name="nmaprun")
 public class Scan {
 
     private List<Host> hosts;

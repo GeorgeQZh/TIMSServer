@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/logo-icon.png}">
-    <title>主动扫描</title>
+    <title>TIMS-主动扫描</title>
 
     <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -46,12 +46,75 @@
                     <div class="col-md-5 col-8 align-self-center">
                         <h3 class="text-themecolor m-b-0 m-t-0">主动扫描</h3>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">TIMS</a></li>
                             <li class="breadcrumb-item active">主动扫描</li>
                         </ol>
                     </div>
                 </div>
+
+
+
                 <div class="row">
+
+
+
+                    <div class="col-6">
+
+                        <div class="card">
+                            <div class="card-block">
+                                255.255.255.0
+                            </div>
+                        </div>
+
+
+                        <!--<div class="container" id="out-container">-->
+                            <!--<div class="out_container">-->
+                                <!--<div  th:replace="fragments/ongoing :: ongoing"-->
+                                      <!--th:fragment="ongoing" id="out-fragment">-->
+                                <!--</div>-->
+                                <!--<div  th:replace="fragments/finished :: finished"-->
+                                      <!--th:fragment="finished" id="out-finished-fragment">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+
+
+
+                        <div class="card">
+                            <!--搜索框-->
+                            <div class="card-block">
+                                <h3>单机扫描</h3>
+                                <form id="inputForm1" class="app-search" th:action="@{ip}" method="post">
+                                    <div class="form-inline">
+                                        <input type="text" class="form-control" id="targetIp" name="target-ip" placeholder="ip地址，如：219.219.220.50">
+
+                                        <a class="inputBtn nav-link hidden-sm-down text-muted waves-effect waves-dark text-right"
+                                           type="submit">
+                                            <i class="ti-search"></i>
+                                        </a>
+                                    </div>
+
+
+                                </form>
+                                <br>
+
+                                <h3>扫描网段</h3>
+                                <form id="inputForm2" class="app-search" th:action="@{ips}" method="post">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="net" name="net" placeholder="网络地址，如：192.168.60.0">
+                                        <input type="text" class="form-control" id="mask" name="mask" placeholder="子网掩码，如：255.255.255.0">
+                                        <a class="inputBtn2 nav-link hidden-sm-down text-muted waves-effect waves-dark"
+                                           type="submit">
+                                            <i class="ti-search"></i>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
 
                     <div class="col-6 ">
                         <div class="card">
@@ -113,55 +176,7 @@
 
                     </div>
 
-                    <div class="col-6">
 
-                        <div class="card">
-                            <div class="card-block">
-                                255.255.255.255.
-                            </div>
-                        </div>
-
-
-                        <div th:text="${command}"></div>
-                        <!--!=null?'开始扫描':'扫描中'-->
-
-
-                        <div class="card">
-                            <!--搜索框-->
-                            <div class="card-block">
-                                <h3>单机扫描</h3>
-                                <form id="inputForm1" class="app-search" th:action="@{ip}" method="post">
-                                    <div class="form-inline">
-                                        <input type="text" class="form-control" id="target-ip" name="target-ip" placeholder="   .   .   .   ">
-                                        <!--<a class="srh-btn"><i class="ti-close"></i></a>-->
-
-                                        <!--nav-link hidden-sm-down text-muted waves-effect waves-dark text-right-->
-                                        <a class="inputBtn nav-link hidden-sm-down text-muted waves-effect waves-dark text-right"
-                                           type="submit">
-                                            <i class="ti-search"></i>
-                                        </a>
-                                    </div>
-
-
-                                </form>
-                                <br>
-
-                                <h3>扫描网段</h3>
-                                <form id="inputForm2" class="app-search" th:action="@{ips}" method="get">
-                                    <div class="form-inline">
-                                        <input type="text" class="form-control" name="first-ip" placeholder="首地址">
-                                        <input type="text" class="form-control" name="last-ip" placeholder="末地址">
-                                        <!--<a class="srh-btn"><i class="ti-close"></i></a>-->
-                                        <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark align-bottom form-check-input"
-                                           type="submit">
-                                            <i class="ti-search"></i>
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
 
             </div>
@@ -189,8 +204,9 @@
     <script>
         $(".inputBtn").click(function (){
 
-            if(checkIp($("#targetIp").text())){
-                $("#inputForm1").submit($("#targetIp").text());
+            alert($("#targetIp").val());
+            if(checkIp($("#targetIp").val())){
+                $("#inputForm1").submit();
                 return false;
             }
             else{
@@ -198,13 +214,45 @@
                 return false;
             }
         });
+
+        $(".inputBtn2").click(function (){
+
+
+            alert($("#net").val());
+            alert($("#mask").val());
+            if(!checkIp($("#net").val()) ){
+
+                alert("请检查网络地址格式");
+            }
+            else if(!checkMask($("#mask").val())){
+
+                alert("请检查子网掩码格式");
+                return false;
+            }
+            else{
+                $("#inputForm2").submit();
+                return false;
+            }
+        });
+
+
         function checkIp(ip) {
-            varexp=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+            var exp=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
             var reg = ip.match(exp);
             if(reg==null){
                 return false;
             } else {
                 return true;
+            }
+        }
+
+        function checkMask(mask) {
+            var exp1=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}$/;
+            var reg1 = mask.match(exp1);
+            if(reg1==null){
+                return false;
+            } else {
+            return true;
             }
         }
 

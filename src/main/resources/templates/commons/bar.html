@@ -111,26 +111,26 @@
                             </a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" th:href="@{icon-material}"
+                            <a class="waves-effect waves-dark" th:href="@{management}"
                                href="../static/icon-material.html" aria-expanded="false">
                                 <i class="mdi mdi-emoticon"></i>
                                 <span class="hide-menu">权限管理</span>
                             </a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" th:href="@{map-google}"
+                            <a class="waves-effect waves-dark" th:href="@{setting}"
                                href="../static/map-google.html" aria-expanded="false">
                                 <i class="mdi mdi-earth"></i>
                                 <span class="hide-menu">系统设置</span>
                             </a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" th:href="@{pages-blank}"
+                        <li> <a class="waves-effect waves-dark" th:href="@{map}"
                                 href="../static/pages-blank.html" aria-expanded="false">
                             <i class="mdi mdi-book-open-variant"></i>
-                            <span class="hide-menu">Blank Page</span>
+                            <span class="hide-menu">map</span>
                         </a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" th:href="@{pages-error-404}"
+                        <li> <a class="waves-effect waves-dark" th:href="@{help}"
                                 href="../static/pages-error-404.html" aria-expanded="false">
                             <i class="mdi mdi-help-circle"></i>
                             <span class="hide-menu">帮助</span>
@@ -143,7 +143,7 @@
             <!-- End Sidebar scroll-->
             <!-- Bottom points-->
             <div class="sidebar-footer">
-                <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <a href="" th:href="@{setting}" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
                 <a th:if="${#strings.isEmpty(session.loginUser)}" th:href="@{login}" href="" class="link" data-toggle="tooltip" title="Login">
                     <i class="mdi mdi-gmail"></i>
                 </a>

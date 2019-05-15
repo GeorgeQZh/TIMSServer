@@ -23,3 +23,5 @@ public interface UserMapper {
     @Insert("insert into users(username,password) values (#{user}.username,#{user}.password)")
     public void insertUser(User user);
 }
+
+

@@ -15,6 +15,8 @@ import java.net.URL;
  * @date 2019/3/8-9:31
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:
+ *
+ * 用java.awt创建一个任务栏图标
  */
 public class app {
 

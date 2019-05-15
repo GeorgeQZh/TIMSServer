@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:v-model="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/logo-icon.png}">
+    <title>TIMS-map</title>
+
+    <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link th:href="@{css/style.css}" href="css/style.css" rel="stylesheet">
+
+    <link th:href="@{css/colors/blue.css}" href="css/colors/blue.css" id="theme" rel="stylesheet">
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+
+    <div id="main-wrapper">
+
+        <div th:replace="commons/bar::#topbar"></div>
+        <div th:replace="commons/bar::#sidebar"></div>
+
+        <div class="page-wrapper">
+
+            <div class="container-fluid">
+
+
+
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">map</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">TIMS</a></li>
+                            <li class="breadcrumb-item active">map</li>
+                        </ol>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div th:replace="commons/bar::#footer"></div>
+
+    </div>
+
+    <script th:src="@{plugins/jquery/jquery.min.js}" src="../static/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script th:src="@{plugins/bootstrap/js/tether.min.js}" src="../static/plugins/bootstrap/js/tether.min.js"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.min.js}" src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script th:src="@{js/jquery.slimscroll.js}" src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script th:src="@{js/waves.js}" src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script th:src="@{js/sidebarmenu.js}" src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script th:src="@{plugins/sticky-kit-master/dist/sticky-kit.min.js}" src="../static/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script th:src="@{js/custom.min.js}" src="js/custom.min.js"></script>
+
+
+</body>
+
+</html>

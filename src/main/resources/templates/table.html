@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/logo-icon.png}" href="../static/images/favicon.png">
-    <title>TIMS</title>
+    <title>TIMS-dhcp识别</title>
     <!-- Bootstrap Core CSS -->
     <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -44,9 +44,27 @@
                     <div class="col-md-5 col-8 align-self-center">
                         <h3 class="text-themecolor m-b-0 m-t-0">Table</h3>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Table</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">TIMS</a></li>
+                            <li class="breadcrumb-item active">DHCP识别</li>
                         </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <!--搜索框-->
+                    <div class="card-block">
+                        <h3>dhcp指纹查询</h3>
+                        <form id="inputForm0" class="app-search" th:action="@{dhcps}" method="post">
+                            <div class="form-inline">
+                                <input type="text" class="form-control" id="ip" name="ip" placeholder="ip地址，如：219.219.220.50">
+
+                                <a class="inputBtn nav-link hidden-sm-down text-muted waves-effect waves-dark text-right"
+                                   type="submit">
+                                    <i class="ti-search"></i>
+                                </a>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
 
@@ -116,6 +134,32 @@
             <div th:replace="commons/bar::#footer"></div>
         </div>
     </div>
+
+    <script>
+        $(".inputBtn").click(function (){
+
+            alert($("#ip").val());
+            if(checkIp($("#ip").val())){
+                $("#inputForm0").submit();
+                return false;
+            }
+            else{
+                alert("请检查ip格式");
+                return false;
+            }
+        });
+
+          function checkIp(ip) {
+            var exp=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+            var reg = ip.match(exp);
+            if(reg==null){
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    </script>
 
     <script th:src="@{plugins/jquery/jquery.min.js}" src="../static/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->

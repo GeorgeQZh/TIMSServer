@@ -40,6 +40,11 @@ public class CommandExecutorImpl  implements CommandExecutor{
 
     public CommandExecutorImpl(){};
 
+
+    /**
+     * 执行指令的关键部分！！！
+     * @return
+     */
     @Override
     public boolean execute(){
 
@@ -93,10 +98,12 @@ public class CommandExecutorImpl  implements CommandExecutor{
 
                         }
 
+                        System.out.println("结果：   "+cmd.getOutput().getText());
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
-                        readXML();
+                        readXML();             //??,有问题
                         cmd.setFinished(true);
                         notifyEnd();
                         if (reader != null) {
@@ -132,6 +139,8 @@ public class CommandExecutorImpl  implements CommandExecutor{
         commandList.add("nmap");
         commandList.addAll(splitOptions());
         commandList.addAll(Arrays.asList(new String[]{"-oX" , getTempPath(), "--webxml"}));
+
+        System.out.println(commandList.toString());
 
         return commandList.toArray(new String[]{});
 
@@ -198,20 +207,26 @@ public class CommandExecutorImpl  implements CommandExecutor{
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
                 sb.append(sCurrentLine);
-//                System.out.println("sb:"+sb.toString());
+                System.out.println(sCurrentLine);
             }
 
             JAXBContext jaxbContext = JAXBContext.newInstance(ExecutionObjectFactory.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            StringReader reader = new StringReader(sb.toString());
-            Object execution = unmarshaller.unmarshal(reader);
 
-            //
+            StringReader reader = new StringReader(sb.toString());
+            System.out.println("0");
+            Object execution = unmarshaller.unmarshal(reader);
+            System.out.println("1");
+
             cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
-            if (execution instanceof Scan)
+            if (execution instanceof Scan){
                 cmd.getOutput().setScan((Scan) execution);
-            else if (execution instanceof ScriptHelp)
+            }
+
+            else if (execution instanceof ScriptHelp){
                 cmd.getOutput().setScriptHelp((ScriptHelp) execution);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();

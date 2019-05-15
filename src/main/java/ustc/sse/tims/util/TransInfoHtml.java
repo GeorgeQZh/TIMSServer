@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+
 /**
  * @author ZHGQ
  * @project TIMSServer
@@ -18,10 +19,10 @@ import java.io.StringWriter;
 public class TransInfoHtml {
     private TransInfoHtml(){}
 
-    public static String transformToHtml(String xml) throws TransformerException {
+    public static String transformToHtml(String xml) throws TransformerException{
 
-        //InputStream xsl = new URL("https://svn.nmap.org/nmap/docs/nmap.xsl").openStream();
-        InputStream xsl = TransInfoHtml.class.getClassLoader().getResourceAsStream("static/nmap.xsl");
+//        InputStream xsl = new URL("https://svn.nmap.org/nmap/docs/nmap.xsl").openStream();
+        InputStream xsl = TransInfoHtml.class.getClassLoader().getResourceAsStream("nmap.xsl");
 
         StringWriter writer = new StringWriter();
 

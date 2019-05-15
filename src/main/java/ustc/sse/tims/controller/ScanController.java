@@ -11,8 +11,8 @@ import ustc.sse.tims.excutor.CommandExecutor;
 import ustc.sse.tims.excutor.CommandExecutorImpl;
 import ustc.sse.tims.excutor.CommandExecutorObserver;
 import ustc.sse.tims.model.Command;
+import ustc.sse.tims.model.IPv4Address;
 import ustc.sse.tims.util.Filefinder;
-
 import javax.annotation.PostConstruct;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -35,43 +35,47 @@ public class ScanController implements CommandExecutorObserver {
     private List<Command> finishedCommands = new ArrayList<Command>();
     private Command command;
     private boolean finishedCommandQueued=false;
-    private String code ="nmap -O --osscan-guess ";
     private InitialConfigurator config = new InitialConfigurator();
 
 
-    @PostConstruct
-    public void init(){
-        config.configure();
-    }
+//    @PostConstruct
+//    public void init(){
+//        config.configure();
+//    }
 
-    @PostMapping("/ip/{target-ip}")
-    public String scanIp(@PathVariable("target-ip") String targetIp, Model model){
+    @PostMapping("/ip")
+    public String scanIp(@RequestParam("target-ip") String targetIp, Model model){
 
-        code +=targetIp;
-                command =  new Command(code);
+        String code ="-O "+targetIp;
+        command =  new Command(code);
         ongoingCommands.add(0,command);
         executeCommand(command);
         model.addAttribute("command", command);
         model.addAttribute("commands", ongoingCommands);
-        System.out.println("开始扫描");
 
         return "scan";
     }
 
-    @GetMapping("/ips/{first-ip},{last-ip}")
-    public String scanIp(@PathVariable("first-ip") String fistIp,
-                         @PathVariable("last-ip") String lastIP,
+    @PostMapping("/ips")
+    public String scanIps(@RequestParam("net") String net,
+                         @RequestParam("mask") String mask,
                          Model model){
+        IPv4Address netIp=null;
+        try{
+            netIp = new IPv4Address(net);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        code+= fistIp+""+lastIP ;
+        String code = "-O "+net+"/"+resolveMask(mask);
+        System.out.println(code);
         command =  new Command(code);
         ongoingCommands.add(0,command);
         executeCommand(command);
         model.addAttribute("command", command);
         model.addAttribute("commands", ongoingCommands);
         System.out.println("开始扫描");
-
-        return "scan::output";
+        return "scan";
     }
 
 
@@ -92,7 +96,7 @@ public class ScanController implements CommandExecutorObserver {
         model.addAttribute("command", command);
         model.addAttribute("commands", ongoingCommands);
 
-        return "fragments/contents :: ongoing";
+        return "scan";
     }
 
     @GetMapping("/nmap/update-finished")
@@ -101,7 +105,7 @@ public class ScanController implements CommandExecutorObserver {
         model.addAttribute("command", command);
         model.addAttribute("finishedCommands", finishedCommands);
         finishedCommandQueued=false;
-        return "fragments/contents :: finished";
+        return "scan";
     }
 
     @GetMapping("/nmap/finishedQueued")
@@ -143,5 +147,23 @@ public class ScanController implements CommandExecutorObserver {
         CommandExecutor executor = new CommandExecutorImpl(command);
         executor.addObserver(this);
         executor.execute();
+    }
+
+    private int resolveMask(String mask){
+        int k=0;
+        String[] spls = mask.split("\\.");
+        for(String s : spls) {
+            int a = Integer.parseInt(s);
+            if(a==255){
+                k+=8;
+            }else{
+                int i=7;
+                while(a>0){
+                    a-=2^i--;
+                    k++;
+                }
+            }
+        }
+        return k;
     }
 }

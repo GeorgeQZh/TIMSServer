@@ -45,31 +45,31 @@ public class InitialConfigurator implements CommandExecutorObserver {
         this.menu = menu;
     }
 
-    public void configure(){
+//    public void configure(){
+//
+//        try {
+//            loadMenu();
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        Command command =  new Command("--script-help all");
+//        CommandExecutor executor = new CommandExecutorImpl(command);
+//        executor.addObserver(this);
+//        executor.execute();
+//    }
 
-        try {
-            loadMenu();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        Command command =  new Command("--script-help all");
-        CommandExecutor executor = new CommandExecutorImpl(command);
-        executor.addObserver(this);
-        executor.execute();
-    }
-
-    private void loadMenu() throws Exception {
-        InputStream xml = InitialConfigurator.class.getClassLoader()
-                .getResourceAsStream("menu.xml");
-        System.out.println("1");
-        JAXBContext jaxbContext = JAXBContext.newInstance(Menu.class);
-        System.out.println("2");
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        Menu menu = (Menu)unmarshaller.unmarshal(xml);
-        this.setMenu(menu);
-
-    }
+//    private void loadMenu() throws Exception {
+//        InputStream xml = InitialConfigurator.class.getClassLoader()
+//                .getResourceAsStream("menu.xml");
+//        System.out.println("1");
+//        JAXBContext jaxbContext = JAXBContext.newInstance(Menu.class);
+//        System.out.println("2");
+//        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+//        Menu menu = (Menu)unmarshaller.unmarshal(xml);
+//        this.setMenu(menu);
+//
+//    }
 
     @Override
     public void finishedCommand(Command cmd) {

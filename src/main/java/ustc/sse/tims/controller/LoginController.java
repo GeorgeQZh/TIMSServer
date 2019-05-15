@@ -35,7 +35,7 @@ public class LoginController {
                         HttpSession session, Model model){
 
         User user = userMapper.getUserByName(userName);
-        if(user == null){
+        if(user == null || user.equals("")){
             model.addAttribute("msg1","用户不存在");
             return "login";
         }
