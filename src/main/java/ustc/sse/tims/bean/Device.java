@@ -1,5 +1,9 @@
 package ustc.sse.tims.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Date;
+
 /**
  * @author ZHGQ
  * @project TIMSServer
@@ -10,11 +14,18 @@ package ustc.sse.tims.bean;
  */
 public class Device {
     private int id;
-    private String ip_hold;
-    private String option55;
-    private String dev_name;
-    private String os_name;
-    private String version;
+    private String name;
+    private Date created_at;
+    private Date updated_at;
+    private int parent_id;
+    private String virtual_parent_id;
+    @JsonIgnore
+    private int child_devices_count;
+    private int child_virtual_devices_count;
+    private boolean can_be_more_precise;
+    private Device parents;
+    private int line;
+    private int column;
 
     public int getId() {
         return id;
@@ -24,56 +35,109 @@ public class Device {
         this.id = id;
     }
 
-    public String getIp_hold() {
-        return ip_hold;
+    public String getName() {
+        return name;
     }
 
-    public void setIp_hold(String ip_hold) {
-        this.ip_hold = ip_hold;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getOption55() {
-        return option55;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setOption55(String option55) {
-        this.option55 = option55;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
-    public String getDev_name() {
-        return dev_name;
+    public Date getUpdated_at() {
+        return updated_at;
     }
 
-    public void setDev_name(String dev_name) {
-        this.dev_name = dev_name;
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
     }
 
-    public String getOs_name() {
-        return os_name;
+    public int getParent_id() {
+        return parent_id;
     }
 
-    public void setOs_name(String os_name) {
-        this.os_name = os_name;
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
     }
 
-    public String getVersion() {
-        return version;
+    public String getVirtual_parent_id() {
+        return virtual_parent_id;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setVirtual_parent_id(String virtual_parent_id) {
+        this.virtual_parent_id = virtual_parent_id;
+    }
+
+    public int getChile_decices_count() {
+        return child_devices_count;
+    }
+
+    public void setChile_decices_count(int chile_decices_count) {
+        this.child_devices_count = chile_decices_count;
+    }
+
+    public int getChild_virtual_devices_count() {
+        return child_virtual_devices_count;
+    }
+
+    public void setChild_virtual_devices_count(int child_virtual_devices_count) {
+        this.child_virtual_devices_count = child_virtual_devices_count;
+    }
+
+    public boolean isCan_be_more_precise() {
+        return can_be_more_precise;
+    }
+
+    public void setCan_be_more_precise(boolean can_be_more_precise) {
+        this.can_be_more_precise = can_be_more_precise;
+    }
+
+    public Device getParents() {
+        return parents;
+    }
+
+    public void setParents(Device parents) {
+        this.parents = parents;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 
     @Override
     public String toString() {
         return "Device{" +
                 "id=" + id +
-                ", ip_hold='" + ip_hold + '\'' +
-                ", option55='" + option55 + '\'' +
-                ", dev_name='" + dev_name + '\'' +
-                ", os_name='" + os_name + '\'' +
-                ", version='" + version + '\'' +
+                ", name='" + name + '\'' +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", parent_id='" + parent_id + '\'' +
+                ", virtual_parent_id='" + virtual_parent_id + '\'' +
+                ", chile_decices_count=" + child_devices_count +
+                ", child_virtual_devices_count=" + child_virtual_devices_count +
+                ", can_be_more_precise=" + can_be_more_precise +
+                ", parents=" + parents +
+                ", line=" + line +
+                ", column=" + column +
                 '}';
     }
-
 }

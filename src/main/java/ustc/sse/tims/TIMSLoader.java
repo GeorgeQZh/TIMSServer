@@ -15,7 +15,7 @@ import java.util.Objects;
  * @Package ustc.sse.tims.util
  * @date 2019/3/8-9:33
  * @Copyright: (c) 2019 USTC. All rights reserved.
- * @Description:
+ * @Description: 启动类：通过java.awt设置托盘图标及右键菜单，并启动spring boot项目
  */
 public class TIMSLoader {
 
@@ -34,8 +34,6 @@ public class TIMSLoader {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-//        springContext = NMapGuiApplication.mainExec(args);
 
         ImageIcon trayImg = new ImageIcon(
                 Objects.requireNonNull(TIMSLoader.class.getClassLoader().getResource(ICON_PATH)));// 托盘图标
