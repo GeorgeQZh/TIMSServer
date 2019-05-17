@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import ustc.sse.tims.bean.Device;
+import ustc.sse.tims.bean.FingerPrint;
 
 /**
  * @author ZHGQ
@@ -27,5 +28,13 @@ public interface DHCPMapper {
 
     @Delete("DELETE FROM dhcp_fringerprint WHERE option55= #{option55}")
     public void deletDevByOpt55(String option55);
+
+    //todo  sql
+
+    public FingerPrint getFingerPrintByOpt55(String option55);
+
+    public void setFingerPrintByOpt55(String option55);
+
+    public void updateFingerPrintByOpt55(String option55);
 
 }

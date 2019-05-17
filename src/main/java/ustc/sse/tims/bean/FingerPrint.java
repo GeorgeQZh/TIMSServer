@@ -16,8 +16,7 @@ public class FingerPrint {
     public String device_name;
     @JsonIgnore
     private Device device;
-    private int line;
-    private int column;
+
 
     public int getScore() {
         return score;
@@ -51,21 +50,6 @@ public class FingerPrint {
         this.device = device;
     }
 
-    public int getLine() {
-        return line;
-    }
-
-    public void setLine(int line) {
-        this.line = line;
-    }
-
-    public int getColumn() {
-        return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
 
     @Override
     public String toString() {
@@ -74,8 +58,6 @@ public class FingerPrint {
                 ", version='" + version + '\'' +
                 ", device_name='" + device_name + '\'' +
                 ", device=" + device +
-                ", line=" + line +
-                ", column=" + column +
                 '}';
     }
 }

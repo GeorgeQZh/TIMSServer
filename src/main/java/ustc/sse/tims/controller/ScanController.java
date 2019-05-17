@@ -12,8 +12,8 @@ import ustc.sse.tims.excutor.CommandExecutorImpl;
 import ustc.sse.tims.excutor.CommandExecutorObserver;
 import ustc.sse.tims.model.Command;
 import ustc.sse.tims.model.IPv4Address;
-import ustc.sse.tims.util.Filefinder;
-import javax.annotation.PostConstruct;
+import ustc.sse.tims.util.FileFinder;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -123,7 +123,7 @@ public class ScanController implements CommandExecutorObserver {
 
         InputStream file;
         try {
-            file = new Filefinder().find(filename);
+            file = new FileFinder().find(filename);
             InputStreamResource resource = new InputStreamResource(file);
 
             return ResponseEntity.ok()

@@ -25,7 +25,7 @@ public class TIMSLoader {
     private static ConfigurableApplicationContext springContext;
 
     private CommandExecutorImpl executor = new CommandExecutorImpl(new Command("-V"));
-    boolean nmapInstalled=executor.getCmd().getOutput().getText().contains("Nmap version");
+    boolean nmapInstalled = executor.getCmd().getOutput().getText().contains("Nmap version");
 
     public static void main(String[] args) {
 

@@ -13,7 +13,7 @@ import java.io.InputStream;
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:
  */
-public class Filefinder {
+public class FileFinder {
 
     public InputStream find(String filename) throws FileNotFoundException {
         File xml =new File(System.getProperty("java.io.tmpdir")+"/"+filename+".xml");

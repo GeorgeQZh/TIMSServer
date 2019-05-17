@@ -1,5 +1,6 @@
 package ustc.sse.tims.model;
 
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+
 
 /**
  * @author ZHGQ
@@ -18,6 +20,7 @@ import java.net.URL;
  *
  * 用java.awt创建一个任务栏图标
  */
+
 public class app {
 
     private static PopupMenu popupMenu = new PopupMenu();
@@ -36,10 +39,7 @@ public class app {
         itemExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                System.out.println("点击退出");
-
-                System.exit(0);
+                System.exit(0);  //退出
             }
         });
 
@@ -53,9 +53,8 @@ public class app {
         itemDisplay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("点击显示");
                 try {
-                    openWebpage(new URL("http://localhost:8080/tims/index"));
+                    openWebpage(new URL("http://localhost:8080/tims/index"));  //打开页面
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }

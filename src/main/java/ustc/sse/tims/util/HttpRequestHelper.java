@@ -1,5 +1,7 @@
 package ustc.sse.tims.util;
 
+import org.springframework.stereotype.Component;
+
 import java.io.DataInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,8 +14,10 @@ import java.util.Map;
  * @Package ustc.sse.tims.util
  * @date 2019/4/16-17:00
  * @Copyright: (c) 2019 USTC. All rights reserved.
- * @Description:
+ * @Description: 向在线指纹库API发送请求
  */
+
+@Component
 public class HttpRequestHelper {
     public static String GetPostUrl(String sendUrl, Map<String, String> params, String sendType, String charset,
                                     int repeat_request_count, int repeat_request_max_count) {
@@ -34,6 +38,9 @@ public class HttpRequestHelper {
                 paramSb.substring(0, paramSb.length() - 1);
             }
             url = new URL(sendUrl + "?" + paramSb.toString());
+
+            System.out.println("APIurl:"+ url);
+
             httpurlconnection = (HttpURLConnection) url.openConnection();
             httpurlconnection.setRequestMethod("GET");
             httpurlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

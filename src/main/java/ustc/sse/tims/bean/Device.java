@@ -24,8 +24,7 @@ public class Device {
     private int child_virtual_devices_count;
     private boolean can_be_more_precise;
     private Device parents;
-    private int line;
-    private int column;
+
 
     public int getId() {
         return id;
@@ -107,21 +106,7 @@ public class Device {
         this.parents = parents;
     }
 
-    public int getLine() {
-        return line;
-    }
 
-    public void setLine(int line) {
-        this.line = line;
-    }
-
-    public int getColumn() {
-        return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
 
     @Override
     public String toString() {
@@ -136,8 +121,6 @@ public class Device {
                 ", child_virtual_devices_count=" + child_virtual_devices_count +
                 ", can_be_more_precise=" + can_be_more_precise +
                 ", parents=" + parents +
-                ", line=" + line +
-                ", column=" + column +
                 '}';
     }
 }

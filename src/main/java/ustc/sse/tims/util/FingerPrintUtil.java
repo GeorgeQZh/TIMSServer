@@ -1,8 +1,12 @@
 package ustc.sse.tims.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ustc.sse.tims.bean.FingerPrint;
 import ustc.sse.tims.bean.IpAssignment;
+import ustc.sse.tims.config.SystemConfig;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,20 +21,30 @@ import java.util.Map;
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:
  */
-public class FingerPrintUtil {
 
-    private String baseUrl = "https://api.fingerbank.org/api/v2/combinations/interrogate";
-    private String keyStr="3a6a11c4598c7e042043e93afcfca24a856b5b85";
+public class FingerPrintUtil {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    private static String key;
+    private static String url;
+    private static Logger logger;
 
-    public String getFingerPrintbyOpt55(String opt55){
+    @Autowired
+    private void setParams(SystemConfig conf,LoggerFactory lf){
+        key = conf.getFinger_print_api_permission();
+        url = conf.getFinger_print_api_url();
+        logger = lf.getLogger(getClass());
+    }
+
+
+
+    public String getFingerPrintByOpt55(String opt55){
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("dhcp_fingerprint", opt55);
-        params.put("key",keyStr);
-        String result = HttpRequestHelper.GetPostUrl(baseUrl, params,
+        params.put("dhcp_fingerprint", opt55);   //API的格式要求
+        params.put("key",key);
+        String result = HttpRequestHelper.GetPostUrl(url, params,
                 "GET",null, 0, 0);
         return result;
 
@@ -43,10 +57,10 @@ public class FingerPrintUtil {
         ArrayList <IpAssignment> ipAssignments = new ArrayList<>();
         for(String ip: ip_opts.keySet()){
             String option55 = ip_opts.get(ip);
-            String fp_str = getFingerPrintbyOpt55(option55);
+            String fp_str = getFingerPrintByOpt55(option55);
             FingerPrint fingerPrint = resolveJason(fp_str);
 
-            System.out.println("fp:"+fp_str);
+            logger.debug("fp:"+fp_str);
             IpAssignment ipAssignment = new IpAssignment(ip,fingerPrint);
             ipAssignments.add(ipAssignment);
         }
@@ -57,11 +71,9 @@ public class FingerPrintUtil {
 
         FingerPrint fingerPrint = mapper.readValue(finger_str, FingerPrint.class);
 
-        System.out.println("fingerPrint:" + fingerPrint.toString());
+        logger.debug("fingerPrint:"+fingerPrint.toString());
         return fingerPrint;
 
     }
-
-
 
 }

@@ -5,7 +5,9 @@ spring:
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/tims?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
     type: com.alibaba.druid.pool.DruidDataSource
+
 #    #   数据源其他配置
 #    initialSize: 5
 #    minIdle: 5
@@ -29,3 +31,7 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+
+

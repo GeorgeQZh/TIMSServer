@@ -215,6 +215,8 @@ public class CommandExecutorImpl  implements CommandExecutor{
 
             StringReader reader = new StringReader(sb.toString());
             System.out.println("0");
+
+            //???
             Object execution = unmarshaller.unmarshal(reader);
             System.out.println("1");
 

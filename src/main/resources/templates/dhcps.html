@@ -46,27 +46,29 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">TIMS</a></li>
                             <li class="breadcrumb-item active">DHCP识别</li>
+
+
                         </ol>
                     </div>
                 </div>
 
-                <div class="card">
-                    <!--搜索框-->
-                    <div class="card-block">
-                        <h3>dhcp指纹查询</h3>
-                        <form id="inputForm0" class="app-search" th:action="@{dhcps}" method="post">
-                            <div class="form-inline">
-                                <input type="text" class="form-control" id="ip" name="ip" placeholder="ip地址，如：219.219.220.50">
+                <!--<div class="card">-->
+                    <!--&lt;!&ndash;搜索框&ndash;&gt;-->
+                    <!--<div class="card-block">-->
+                        <!--<h3>dhcp指纹查询</h3>-->
+                        <!--<form id="inputForm0" class="app-search" th:action="@{dhcps}" method="post">-->
+                            <!--<div class="form-inline">-->
+                                <!--<input type="text" class="form-control" id="ip" name="ip" placeholder="DHCP请求 option55">-->
 
-                                <a class="inputBtn nav-link hidden-sm-down text-muted waves-effect waves-dark text-right"
-                                   type="submit">
-                                    <i class="ti-search"></i>
-                                </a>
-                            </div>
+                                <!--<a class="inputBtn nav-link hidden-sm-down text-muted waves-effect waves-dark text-right"-->
+                                   <!--type="submit">-->
+                                    <!--<i class="ti-search"></i>-->
+                                <!--</a>-->
+                            <!--</div>-->
 
-                        </form>
-                    </div>
-                </div>
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
 
                 <div class="row">
                     <!-- column -->
@@ -81,6 +83,7 @@
                                             <tr>
                                                 <th>ip</th>
                                                 <th>Device name</th>
+                                                <th>查看详情</th>
                                                 <th>权限管理</th>
                                             </tr>
                                         </thead>
@@ -89,7 +92,10 @@
                                                 <td th:text="${ipAssignment.ip}"></td>
                                                 <td>[[${ipAssignment.fingerPrint.device_name}]]</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-primary" th:href="@{/privalige/}+${ipAssignment.ip}">管理</a>
+                                                    <a class="btn btn-sm btn-info" th:href="@{/dev_details/} + ${ipAssignment.ip}">详情</a>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary" th:href="@{/privalige/} + ${ipAssignment.ip}">管理</a>
                                                 </td>
 
                                             </tr>
