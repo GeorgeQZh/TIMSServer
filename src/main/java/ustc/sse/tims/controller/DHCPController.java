@@ -49,6 +49,9 @@ public class DHCPController {
 
         //todo 查询数据库 或 缓存
 
+
+        //调用在线API
+
         FingerPrintUtil fingerPrintUtil =new FingerPrintUtil();
         ArrayList<IpAssignment> ipAssignments = fingerPrintUtil.getIpAssignments(ipOpts);
 

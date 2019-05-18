@@ -1,6 +1,8 @@
 package ustc.sse.tims.model;
 
 
+import ustc.sse.tims.util.Constant;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +48,15 @@ public class app {
         itemSetting.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("点击设置");
+                try {
+                    //打开设置页
+                    openWebpage(new URL("http://"+
+                            Constant.tims_server_addr+ ":"+
+                            Constant.tims_server_port +
+                            "/tims/setting"));
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -54,7 +64,11 @@ public class app {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    openWebpage(new URL("http://localhost:8080/tims/index"));  //打开页面
+                    //打开导航页
+                    openWebpage(new URL("http://"+
+                            Constant.tims_server_addr+ ":"+
+                            Constant.tims_server_port +
+                            "/tims/index"));
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }

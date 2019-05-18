@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ustc.sse.tims.bean.FingerPrint;
 import ustc.sse.tims.bean.IpAssignment;
 import ustc.sse.tims.config.SystemConfig;
@@ -22,29 +23,22 @@ import java.util.Map;
  * @Description:
  */
 
+@Component
 public class FingerPrintUtil {
 
     private ObjectMapper mapper = new ObjectMapper();
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private static String key;
-    private static String url;
-    private static Logger logger;
-
-    @Autowired
-    private void setParams(SystemConfig conf,LoggerFactory lf){
-        key = conf.getFinger_print_api_permission();
-        url = conf.getFinger_print_api_url();
-        logger = lf.getLogger(getClass());
-    }
-
+//    @Autowired
+//    SystemConfig config;
 
 
     public String getFingerPrintByOpt55(String opt55){
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("dhcp_fingerprint", opt55);   //API的格式要求
-        params.put("key",key);
-        String result = HttpRequestHelper.GetPostUrl(url, params,
+        params.put("key",Constant.fp_api_key);
+        String result = HttpRequestHelper.GetPostUrl(Constant.fp_api_url, params,
                 "GET",null, 0, 0);
         return result;
 

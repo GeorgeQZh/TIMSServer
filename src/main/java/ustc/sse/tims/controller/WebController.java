@@ -1,7 +1,10 @@
 package ustc.sse.tims.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ustc.sse.tims.config.SystemConfig;
 
 
 /**
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class WebController{
+
+    @Autowired
+    SystemConfig config;
 
     @GetMapping("/index")
     public String toPageIndex() {
@@ -31,7 +37,9 @@ public class WebController{
     }
 
     @GetMapping("/setting")
-    public String toSetting(){return "setting";}
+    public String toSetting(Model model){
+        model.addAttribute("config",config);
+        return "setting";}
 
     @GetMapping("/help")
     public String toHelp(){

@@ -84,6 +84,21 @@
                                            type="submit">确定</a>
                                     </div>
                                 </form>
+
+                                <h3>系统</h3>
+                                <form id="inputForm3" class="app-search" th:action="@{ips}" method="post">
+                                    <div class="form-group">
+                                        <label>redis host</label>
+                                        <input type="text" class="form-control" id="redis_host" name="redis_host" th:placeholder="${config.redis_host}" placeholder="">
+                                        <label>redis port</label>
+                                        <input type="text" class="form-control" id="redis_port" name="redis_port" th:placeholder="${config.redis_port}">
+                                        <label>redis password</label>
+                                        <input type="text" class="form-control" id="redis_password" name="redis_password" th:placeholder="${config.redis_password}">
+                                        <a class="inputBtn2 nav-link hidden-sm-down text-muted waves-effect waves-dark"
+                                           type="submit">确定</a>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
 

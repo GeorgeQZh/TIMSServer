@@ -3,6 +3,7 @@ package ustc.sse.tims.api;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import redis.clients.jedis.Jedis;
+import ustc.sse.tims.util.Constant;
 import ustc.sse.tims.util.RedisUtil;
 
 import java.util.HashMap;
@@ -38,10 +39,9 @@ public class RedisAPI {
         Jedis redis = RedisUtil.getJedis();
 
         //模糊查询
-        Set<String> keys =  redis.keys("172.*");
+        Set<String> keys =  redis.keys(Constant.ip_regex);
 
         for(String key : keys ){
-            System.out.println(key);
             ipOpts.put(key,redis.get(key));
         }
 

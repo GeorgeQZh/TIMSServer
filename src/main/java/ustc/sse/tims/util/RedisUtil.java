@@ -1,9 +1,7 @@
 package ustc.sse.tims.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
-import ustc.sse.tims.config.SystemConfig;
 
 /**
  * @author ZHGQ
@@ -20,21 +18,11 @@ public class RedisUtil {
 
     private static Jedis jedis;
 
-    private static String host;
-    private static int port;
-
-
-    @Autowired
-    public void setParams(SystemConfig sconf){
-        host = sconf.getRedis_host();
-        port = sconf.getRedis_port();
-    }
-
     //建立、返回redis连接
     public static synchronized Jedis getJedis (){
 
         if(jedis==null){
-            jedis = new Jedis (host,port);
+            jedis = new Jedis (Constant.redis_host,Constant.redis_port);
 
             jedis.connect();
             System.out.println("redis connecting success");

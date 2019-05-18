@@ -39,8 +39,6 @@ public class HttpRequestHelper {
             }
             url = new URL(sendUrl + "?" + paramSb.toString());
 
-            System.out.println("APIurl:"+ url);
-
             httpurlconnection = (HttpURLConnection) url.openConnection();
             httpurlconnection.setRequestMethod("GET");
             httpurlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
