@@ -11,7 +11,7 @@ package ustc.sse.tims.bean;
 public class IpAssignment {
     public String ip;
     public FingerPrint fingerPrint;
-    private int access;
+    public int access;
 
     public IpAssignment(){}
 

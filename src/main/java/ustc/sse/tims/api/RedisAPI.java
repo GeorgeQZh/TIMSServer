@@ -1,7 +1,11 @@
 package ustc.sse.tims.api;
 
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import redis.clients.jedis.Jedis;
 import ustc.sse.tims.util.Constant;
 import ustc.sse.tims.util.RedisUtil;
@@ -20,18 +24,29 @@ import java.util.Set;
  * @Description:  处理redis查询，存储相关操作
  */
 
-@Service
+@Controller
 public class RedisAPI {
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
+    @ResponseBody
     @PostMapping("/IpOpts")
-    public void setIpOpts(Map<String,String> map){
-
+    public String setIpOpts(@RequestParam("ip") String ip,
+                          @RequestParam("option55") String opt55){
         Jedis redis = RedisUtil.getJedis();
-        for(String key : map.keySet()){
-             redis.set(key,map.get(key));
-        }
+        logger.debug("ip:"+ip);
+        logger.debug("option55:"+opt55);
 
+        //更新键值对
+        if(redis.exists(ip)) {
+            redis.del(ip);
+        }
+        redis.set(ip, opt55);
+        //设置ttl=600s
+        redis.expire(ip,600);
+        return "success";
     }
+
 
     public static Map<String,String> getIpOpts(){
 

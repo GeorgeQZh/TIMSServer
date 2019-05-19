@@ -35,7 +35,7 @@ public class TimsApplicationTests {
     @Test
     public void testDHCPBank() throws IOException {
         String result = fingerPrintUtil.getFingerPrintByOpt55(dhcp_option55);
-        System.out.println(result);
+//        System.out.println(result);
 
     }
 
@@ -47,13 +47,13 @@ public class TimsApplicationTests {
         map.put("172.16.72.152","1,33,3,6,15,26,28,51,58,59");
         map.put("172.16.72.153","1,3,6,15,26,28,51,58,59");
 //        map.put("172.16.72.154","1,28,2,3,15,6,119,12,44,47,26,121,42,121,249,252,42");
-        redisAPI.setIpOpts(map);
+//        redisAPI.setIpOpts(map);
     }
 
     @Test
     public void testRedisGetKeys(){
 
-        redisAPI.getIpOpts();
+//        redisAPI.getIpOpts();
 
     }
 

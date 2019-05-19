@@ -50,6 +50,46 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <!-- column -->
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">Access permission</h4>
+                            <h6 class="card-subtitle">management<code>.table</code></h6>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+
+                        <th>Device name</th>
+                        <th>当前权限</th>
+                        <th>当前ip</th>
+                        <th>设置</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ipAssignment:${ipAssignments}">
+                        <td th:text="${ipAssignment.fingerPrint.device_name}"></td>
+                        <td th:text="${ipAssignment.access}==0?'default':${ipAssignment.access}"></td>
+                        <td th:text="${ipAssignment.ip}"></td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" th:href="@{/privalige/} + ${ipAssignment.ip}">设置</a>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
         <div th:replace="commons/bar::#footer"></div>

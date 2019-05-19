@@ -63,7 +63,7 @@
                             <!--搜索框-->
                             <div class="card-block">
                                 <h3>DHCP代理服务器地址</h3>
-                                <form id="inputForm1" class="app-search" th:action="@{server}" method="post">
+                                <form id="inputForm1" class="app-search" th:action="@{serverSettings}" method="post">
                                     <div class="form-inline">
                                         <input type="text" class="form-control" id="targetIp" name="target-ip" placeholder="ip地址，如：219.219.220.50">
 
@@ -71,22 +71,24 @@
                                            type="submit">确定</a>
                                     </div>
 
-
                                 </form>
                                 <br>
 
-                                <h3>其他</h3>
-                                <form id="inputForm2" class="app-search" th:action="@{ips}" method="post">
+                                <h3>FingerPrint 指纹库服务</h3>
+                                <form id="inputForm2" class="app-search" th:action="@{fpSettings}" method="post">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="net" name="net" placeholder="网络地址，如：192.168.60.0">
-                                        <input type="text" class="form-control" id="mask" name="mask" placeholder="子网掩码，如：255.255.255.0">
+                                        <label>API url</label>
+                                        <input type="text" class="form-control" id="fp_url" name="fp_url" th:placeholder="${config.finger_print_api_url}" placeholder="">
+                                        <label>permission</label>
+                                        <input type="text" class="form-control" id="fp_key" name="fp_key" th:placeholder="${config.finger_print_api_permission}">
                                         <a class="inputBtn2 nav-link hidden-sm-down text-muted waves-effect waves-dark"
                                            type="submit">确定</a>
                                     </div>
                                 </form>
 
-                                <h3>系统</h3>
-                                <form id="inputForm3" class="app-search" th:action="@{ips}" method="post">
+
+                                <h3>redis 服务</h3>
+                                <form id="inputForm3" class="app-search" th:action="@{redisSettings}" method="post">
                                     <div class="form-group">
                                         <label>redis host</label>
                                         <input type="text" class="form-control" id="redis_host" name="redis_host" th:placeholder="${config.redis_host}" placeholder="">
@@ -94,6 +96,8 @@
                                         <input type="text" class="form-control" id="redis_port" name="redis_port" th:placeholder="${config.redis_port}">
                                         <label>redis password</label>
                                         <input type="text" class="form-control" id="redis_password" name="redis_password" th:placeholder="${config.redis_password}">
+                                        <label>match pattern (for searching ips in redis)</label>
+                                        <input type="text" class="form-control" id="ip_regex" name="ip_regex" th:placeholder="${config.ip_pattern_regex}">
                                         <a class="inputBtn2 nav-link hidden-sm-down text-muted waves-effect waves-dark"
                                            type="submit">确定</a>
                                     </div>
@@ -108,6 +112,7 @@
             </div>
 
         </div>
+
         <div th:replace="commons/bar::#footer"></div>
 
     </div>

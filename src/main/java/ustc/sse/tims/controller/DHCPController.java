@@ -39,10 +39,12 @@ public class DHCPController {
     @Autowired
     DHCPService dhcpService;
 
+    @Autowired
+    FingerPrintUtil fingerPrintUtil;
+
+
     @GetMapping("/dhcps")
     public String getDHCP(Model model) throws IOException {
-
-        Jedis redis = RedisUtil.getJedis();
 
         //查询ip与option55缓存
         Map<String,String> ipOpts = RedisAPI.getIpOpts();
@@ -51,8 +53,6 @@ public class DHCPController {
 
 
         //调用在线API
-
-        FingerPrintUtil fingerPrintUtil =new FingerPrintUtil();
         ArrayList<IpAssignment> ipAssignments = fingerPrintUtil.getIpAssignments(ipOpts);
 
 
