@@ -20,7 +20,7 @@ import java.util.Map;
  * @Package ustc.sse.tims.util
  * @date 2019/5/15-23:20
  * @Copyright: (c) 2019 USTC. All rights reserved.
- * @Description:
+ * @Description:  处理指纹库查询相关操作
  */
 
 @Component
@@ -33,6 +33,12 @@ public class FingerPrintUtil {
 //    SystemConfig config;
 
 
+    /**
+     * 发送get请求访问在线指纹库api,查询指纹信息
+     *
+     * @param opt55 opt55字符串
+     * @return 指纹信息json串
+     */
     public String getFingerPrintByOpt55(String opt55){
 
         Map<String, String> params = new HashMap<String, String>();
@@ -44,15 +50,20 @@ public class FingerPrintUtil {
 
     }
 
-    // 传入map <ip,option55>
-    // 返回分配情况 IpAssignment
+
+    /**
+     *
+     * @param ip_opts 传入map <ip,option55>
+     * @return 返回分配情况 IpAssignments 列表
+     * @throws IOException
+     */
     public ArrayList<IpAssignment> getIpAssignments (Map<String,String> ip_opts) throws IOException {
 
         ArrayList <IpAssignment> ipAssignments = new ArrayList<>();
         for(String ip: ip_opts.keySet()){
             String option55 = ip_opts.get(ip);
             String fp_str = getFingerPrintByOpt55(option55);
-            FingerPrint fingerPrint = resolveJason(fp_str);
+            FingerPrint fingerPrint = resolveJson(fp_str);
 
             logger.debug("fp:"+fp_str);
             IpAssignment ipAssignment = new IpAssignment(ip,fingerPrint);
@@ -61,7 +72,14 @@ public class FingerPrintUtil {
         return ipAssignments;
     }
 
-    public FingerPrint resolveJason(String finger_str) throws IOException {
+    /**
+     * 解析json 结果
+     *
+     * @param finger_str
+     * @return
+     * @throws IOException
+     */
+    public FingerPrint resolveJson(String finger_str) throws IOException {
 
         FingerPrint fingerPrint = mapper.readValue(finger_str, FingerPrint.class);
 

@@ -19,14 +19,14 @@ import ustc.sse.tims.component.LoginHandlerInterceptor;
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//
-//        registry.addInterceptor(new LoginHandlerInterceptor())
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/index.html","/index","/","/login","/error","/login.html",
-//                        "/static/**","/static/bootstrap/**","/static/css/**","/static/font-awesome/**","/static/ico/**","/static/images/**","/static/img/**","/static/js/**","/static/plugins/**","/static/scss/**","/webjars/**");
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
+        registry.addInterceptor(new LoginHandlerInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/index.html","/index","/","/login","/error","/login.html",
+                        "/static/**","/static/bootstrap/**","/static/css/**","/static/font-awesome/**","/static/ico/**","/static/images/**","/static/img/**","/static/js/**","/static/plugins/**","/static/scss/**","/webjars/**");
+    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -35,6 +35,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/index.html").setViewName("index");
         registry.addViewController("/login.html").setViewName("login");
         registry.addViewController("/dhcps.html").setViewName("dhcps");
+
 
     }
 }

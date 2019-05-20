@@ -1,5 +1,7 @@
 package ustc.sse.tims.model;
 
+import javax.xml.bind.annotation.XmlRegistry;
+
 /**
  * @author ZHGQ
  * @project TIMSServer
@@ -8,6 +10,8 @@ package ustc.sse.tims.model;
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:
  */
+
+@XmlRegistry
 public class ExecutionObjectFactory {
 
     public Scan createScan() {

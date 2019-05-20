@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ustc.sse.tims.InitialConfigurator;
 import ustc.sse.tims.excutor.CommandExecutor;
 import ustc.sse.tims.excutor.CommandExecutorImpl;
 import ustc.sse.tims.excutor.CommandExecutorObserver;
@@ -35,13 +34,7 @@ public class ScanController implements CommandExecutorObserver {
     private List<Command> finishedCommands = new ArrayList<Command>();
     private Command command;
     private boolean finishedCommandQueued=false;
-    private InitialConfigurator config = new InitialConfigurator();
 
-
-//    @PostConstruct
-//    public void init(){
-//        config.configure();
-//    }
 
     @PostMapping("/ip")
     public String scanIp(@RequestParam("target-ip") String targetIp, Model model){

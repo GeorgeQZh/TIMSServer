@@ -36,10 +36,6 @@ public class WebController{
         return "index";
     }
 
-//    @GetMapping("/table")
-//    public String toPageTable() {
-//        return "dhcps";
-//    }
 
     @GetMapping("/scan")
     public String toPageScan() {

@@ -18,12 +18,12 @@
 
 7、docker上运行redis:docker run -d -p 6379:6379 --name 别名  redis镜像名
 
-8、jason 解析采用了jackson
+8、json 解析采用了jackson
 
 9、java操作redis采用了Jedis
 
 10、需要在中作相应的配置修改SystemConfig.properties
 
-11、xml解析值得一试的方向：采用dom4j进行解析
+11、xml解析思路：采用dom4j进行解析，直接匹配找出设备名及类型
 
 

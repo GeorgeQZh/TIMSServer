@@ -63,6 +63,4 @@ public class Scan {
         return linkTraceroute;
     }
 
-
-
 }

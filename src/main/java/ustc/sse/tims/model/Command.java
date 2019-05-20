@@ -17,7 +17,7 @@ public class Command {
     private String text;  //命令
     private boolean finished = false; //是否执行结束
     private Output output = new Output(); //结果
-    private boolean chkUpdateFlag = false; //??检测更新标志？？
+    private boolean chkUpdateFlag = false; //检测更新标志
 
     public Command() {}
 

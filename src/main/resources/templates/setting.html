@@ -14,14 +14,10 @@
 
     <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link th:href="@{css/style.css}" href="css/style.css" rel="stylesheet">
+    <link th:href="@{css/style.css}" rel="stylesheet">
 
-    <link th:href="@{css/colors/blue.css}" href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <link th:href="@{css/colors/blue.css}"  id="theme" rel="stylesheet">
 
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
-<![endif]-->
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -62,17 +58,6 @@
                         <div class="card">
                             <!--搜索框-->
                             <div class="card-block">
-                                <h3>DHCP代理服务器地址</h3>
-                                <form id="inputForm1" class="app-search" th:action="@{serverSettings}" method="post">
-                                    <div class="form-inline">
-                                        <input type="text" class="form-control" id="targetIp" name="target-ip" placeholder="ip地址，如：219.219.220.50">
-
-                                        <a class="inputBtn nav-link hidden-sm-down text-muted waves-effect waves-dark text-right"
-                                           type="submit">确定</a>
-                                    </div>
-
-                                </form>
-                                <br>
 
                                 <h3>FingerPrint 指纹库服务</h3>
                                 <form id="inputForm2" class="app-search" th:action="@{fpSettings}" method="post">
@@ -85,6 +70,7 @@
                                            type="submit">确定</a>
                                     </div>
                                 </form>
+                                <br>
 
 
                                 <h3>redis 服务</h3>
@@ -102,6 +88,18 @@
                                            type="submit">确定</a>
                                     </div>
                                 </form>
+                                <br>
+
+                                <h3>DHCP代理服务器地址</h3>
+                                <form id="inputForm1" class="app-search" th:action="@{serverSettings}" method="post">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="targetIp" name="target-ip" placeholder="ip地址，如：219.219.220.50">
+
+                                        <a class="inputBtn nav-link hidden-sm-down text-muted waves-effect waves-dark text-right"
+                                           type="submit">确定</a>
+                                    </div>
+
+                                </form>
 
                             </div>
                         </div>
@@ -117,20 +115,20 @@
 
     </div>
 
-    <script th:src="@{plugins/jquery/jquery.min.js}" src="../static/plugins/jquery/jquery.min.js"></script>
+    <script th:src="@{plugins/jquery/jquery.min.js}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script th:src="@{plugins/bootstrap/js/tether.min.js}" src="../static/plugins/bootstrap/js/tether.min.js"></script>
-    <script th:src="@{plugins/bootstrap/js/bootstrap.min.js}" src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{plugins/bootstrap/js/tether.min.js}"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.min.js}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script th:src="@{js/jquery.slimscroll.js}" src="js/jquery.slimscroll.js"></script>
+    <script th:src="@{js/jquery.slimscroll.js}" ></script>
     <!--Wave Effects -->
-    <script th:src="@{js/waves.js}" src="js/waves.js"></script>
+    <script th:src="@{js/waves.js}" ></script>
     <!--Menu sidebar -->
-    <script th:src="@{js/sidebarmenu.js}" src="js/sidebarmenu.js"></script>
+    <script th:src="@{js/sidebarmenu.js}" ></script>
     <!--stickey kit -->
-    <script th:src="@{plugins/sticky-kit-master/dist/sticky-kit.min.js}" src="../static/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script th:src="@{plugins/sticky-kit-master/dist/sticky-kit.min.js}" ></script>
     <!--Custom JavaScript -->
-    <script th:src="@{js/custom.min.js}" src="js/custom.min.js"></script>
+    <script th:src="@{js/custom.min.js}"></script>
 
     <script>
         $(".inputBtn").click(function (){

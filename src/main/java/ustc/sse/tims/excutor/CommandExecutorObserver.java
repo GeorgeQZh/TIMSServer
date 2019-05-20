@@ -2,6 +2,7 @@ package ustc.sse.tims.excutor;
 
 import ustc.sse.tims.model.Command;
 
+
 /**
  * @author ZHGQ
  * @project TIMSServer
@@ -10,6 +11,8 @@ import ustc.sse.tims.model.Command;
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:
  */
+
+
 public interface CommandExecutorObserver {
 
     public void finishedCommand(Command cmd);

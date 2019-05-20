@@ -80,10 +80,12 @@ public class CommandExecutorImpl  implements CommandExecutor{
                             else if (line.contains( " filtered "))
                                 line="<span class=\"filtered\">"+line+"</span>";
                             String jump = "\n";
+
+                            //在循环中进行拼串 的 思路
                             if(firstLine)
-                                jump="";
+                                jump = "";
                             cmd.getOutput().setText(cmd.getOutput().getText()+jump+line);
-                            firstLine=false;
+                            firstLine = false;
                         }
 
                         errorReader = new BufferedReader(new InputStreamReader(errors));
@@ -210,24 +212,16 @@ public class CommandExecutorImpl  implements CommandExecutor{
                 System.out.println(sCurrentLine);
             }
 
-            JAXBContext jaxbContext = JAXBContext.newInstance(ExecutionObjectFactory.class);
+            //改
+            JAXBContext jaxbContext = JAXBContext.newInstance(Scan.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             StringReader reader = new StringReader(sb.toString());
-            System.out.println("0");
-
-            //???
             Object execution = unmarshaller.unmarshal(reader);
-            System.out.println("1");
 
             cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
-            if (execution instanceof Scan){
-                cmd.getOutput().setScan((Scan) execution);
-            }
 
-            else if (execution instanceof ScriptHelp){
-                cmd.getOutput().setScriptHelp((ScriptHelp) execution);
-            }
+            cmd.getOutput().setScan((Scan) execution);
 
 
         } catch (Exception e) {

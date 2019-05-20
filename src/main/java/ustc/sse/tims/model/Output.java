@@ -60,12 +60,4 @@ public class Output {
         this.scan = scan;
     }
 
-    public ScriptHelp getScriptHelp() {
-        return scriptHelp;
-    }
-
-    public void setScriptHelp(ScriptHelp scriptHelp) {
-        this.scriptHelp = scriptHelp;
-    }
-
 }

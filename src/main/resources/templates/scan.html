@@ -12,16 +12,23 @@
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/logo-icon.png}">
     <title>TIMS-主动扫描</title>
 
-    <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
-    <link th:href="@{css/style.css}" href="css/style.css" rel="stylesheet">
+    <link th:href="@{css/style.css}" rel="stylesheet">
 
-    <link th:href="@{css/colors/blue.css}" href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <link th:href="@{css/colors/blue.css}" id="theme" rel="stylesheet">
 
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
-<![endif]-->
+    <link rel="stylesheet" th:href="@{css/foundation.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/app.css}" />
+    <link rel="stylesheet" th:href="@{css/output-fragment.css}" />
+    <script th:src="@{js/vendor/jquery-3.2.1.min.js}" ></script>
+    <script th:src="@{js/vendor/foundation.min.js}"	></script>
+    <script th:src="@{js/vendor/d3.v3.min.js}" ></script>
+    <script th:src="@{js/vendor/CollapsibleLists.js}" ></script>
+    <script th:src="@{js/app.js}" ></script>
+    <script th:src="@{js/graph.js}" ></script>
+
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -67,19 +74,6 @@
                         </div>
 
 
-                        <!--<div class="container" id="out-container">-->
-                            <!--<div class="out_container">-->
-                                <!--<div  th:replace="fragments/ongoing :: ongoing"-->
-                                      <!--th:fragment="ongoing" id="out-fragment">-->
-                                <!--</div>-->
-                                <!--<div  th:replace="fragments/finished :: finished"-->
-                                      <!--th:fragment="finished" id="out-finished-fragment">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-
-
 
                         <div class="card">
                             <!--搜索框-->
@@ -116,65 +110,140 @@
                     </div>
 
 
-                    <div class="col-6 ">
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title">Scan Table</h4>
-                                <h6 class="card-subtitle">scan<code>.table</code></h6>
-                                <div class="table-responsive">
-                                    <table class="table" id="output">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sanghani</td>
-                                            <td>Gusikowski</td>
-                                            <td>@Govinda</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Roshan</td>
-                                            <td>Rogahn</td>
-                                            <td>@Hritik</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Joshi</td>
-                                            <td>Hickle</td>
-                                            <td>@Maruti</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Nigam</td>
-                                            <td>Eichmann</td>
-                                            <td>@Sonu</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                    <div  id="out-fragment" class="out_container">
+                        <div class="single-output" th:each="cmd : ${commands}" >
+                            <div class="single-output" >
+                                <table class="output-table">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2" class="command-header">
+                                            <div class="command-display" th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}"></div>
+                                            <div class="loading" > </div>
+                                            <form target="_blank" th:action="@{'/nmap/download/' + ${cmd.output.filename}}">
+                                                <button class="command-action command-action-save" type="submit">
+                                                    <img th:src="@{img/save.png}" />
+                                                </button>
+                                            </form>
+                                            <button class="command-action command-action-minimize" type="button">
+                                                <img th:src="@{img/minimize.png}" />
+                                            </button>
+                                            <button class="command-action command-action-maximize hidden" type="button">
+                                                <img th:src="@{img/maximize.png}" />
+                                            </button>
+                                            <button class="command-action command-action-close" type="button">
+                                                <img th:src="@{img/close.png}"/>
+                                            </button>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td rowspan="3" class="command-nav-bar">
+                                            <button class="command-sidebar-button selected" id="cb1" type="button" data-listedElement="el1">
+                                                <img th:src="@{img/code.png}" src="../../img/code.png" />Output
+                                            </button>
+                                            <button class="command-sidebar-button" id="cb2" type="button" data-listedElement="el2">
+                                                <img th:src="@{img/html.png}" src="../../img/html.png" />HTML
+                                            </button>
+                                            <button class="command-sidebar-button" id="cb3" type="button" data-listedElement="el3">
+                                                <img th:src="@{img/graph.png}" src="../../img/graph.png" />Graph
+                                            </button>
+                                        </td>
+                                        <td class="command-target"><h2></h2></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="result">
+                                            <div id="el1" class = "outtoggle console-output">
+                                                <pre th:utext="${cmd.output.text}"></pre>
+                                                <div class="loading"></div>
+                                            </div>
+                                            <div id="el2" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">
+                                            </div>
+                                            <div th:id="${cmd.output.id}" class="outtoggle nmap hidden svg-container">
+                                                <script th:inline="javascript">
+                                                    var traceroute = /*[[${cmd.output.scan.linkTraceroute}]]*/ ;
+                                                    var id = /*[[${cmd.output.id}]]*/ ;
+                                                    if(traceroute.length > 0){
+                                                        d3.select("#"+id).append(function() { return computeGraph(traceroute).node() });
+                                                    }
+                                                </script>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="command-displaying" th:text="${cmd.output.filename}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-
                     </div>
+
+
+
+
+
+
+                    <!--<div class="col-6 ">-->
+                        <!--<div class="card">-->
+                            <!--<div class="card-block">-->
+                                <!--<h4 class="card-title">Scan Table</h4>-->
+                                <!--<h6 class="card-subtitle">scan<code>.table</code></h6>-->
+                                <!--<div class="table-responsive">-->
+                                    <!--<table class="table" id="output">-->
+                                        <!--<thead>-->
+                                        <!--<tr>-->
+                                            <!--<th>#</th>-->
+                                            <!--<th>First Name</th>-->
+                                            <!--<th>Last Name</th>-->
+                                            <!--<th>Username</th>-->
+                                        <!--</tr>-->
+                                        <!--</thead>-->
+                                        <!--<tbody>-->
+                                        <!--<tr>-->
+                                            <!--<td>1</td>-->
+                                            <!--<td>Deshmukh</td>-->
+                                            <!--<td>Prohaska</td>-->
+                                            <!--<td>@Genelia</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>2</td>-->
+                                            <!--<td>Deshmukh</td>-->
+                                            <!--<td>Gaylord</td>-->
+                                            <!--<td>@Ritesh</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>3</td>-->
+                                            <!--<td>Sanghani</td>-->
+                                            <!--<td>Gusikowski</td>-->
+                                            <!--<td>@Govinda</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>4</td>-->
+                                            <!--<td>Roshan</td>-->
+                                            <!--<td>Rogahn</td>-->
+                                            <!--<td>@Hritik</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>5</td>-->
+                                            <!--<td>Joshi</td>-->
+                                            <!--<td>Hickle</td>-->
+                                            <!--<td>@Maruti</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>6</td>-->
+                                            <!--<td>Nigam</td>-->
+                                            <!--<td>Eichmann</td>-->
+                                            <!--<td>@Sonu</td>-->
+                                        <!--</tr>-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
 
 
                 </div>
@@ -186,20 +255,20 @@
 
     </div>
 
-    <script th:src="@{plugins/jquery/jquery.min.js}" src="../static/plugins/jquery/jquery.min.js"></script>
+    <script th:src="@{plugins/jquery/jquery.min.js}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script th:src="@{plugins/bootstrap/js/tether.min.js}" src="../static/plugins/bootstrap/js/tether.min.js"></script>
-    <script th:src="@{plugins/bootstrap/js/bootstrap.min.js}" src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{plugins/bootstrap/js/tether.min.js}"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.min.js}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script th:src="@{js/jquery.slimscroll.js}" src="js/jquery.slimscroll.js"></script>
+    <script th:src="@{js/jquery.slimscroll.js}" ></script>
     <!--Wave Effects -->
-    <script th:src="@{js/waves.js}" src="js/waves.js"></script>
+    <script th:src="@{js/waves.js}" ></script>
     <!--Menu sidebar -->
-    <script th:src="@{js/sidebarmenu.js}" src="js/sidebarmenu.js"></script>
+    <script th:src="@{js/sidebarmenu.js}" ></script>
     <!--stickey kit -->
-    <script th:src="@{plugins/sticky-kit-master/dist/sticky-kit.min.js}" src="../static/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script th:src="@{plugins/sticky-kit-master/dist/sticky-kit.min.js}" ></script>
     <!--Custom JavaScript -->
-    <script th:src="@{js/custom.min.js}" src="js/custom.min.js"></script>
+    <script th:src="@{js/custom.min.js}"></script>
 
     <script>
         $(".inputBtn").click(function (){
