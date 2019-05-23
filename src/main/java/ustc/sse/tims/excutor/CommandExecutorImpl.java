@@ -212,7 +212,6 @@ public class CommandExecutorImpl  implements CommandExecutor{
                 System.out.println(sCurrentLine);
             }
 
-            //改
             JAXBContext jaxbContext = JAXBContext.newInstance(Scan.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 

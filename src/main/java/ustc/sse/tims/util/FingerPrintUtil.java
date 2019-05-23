@@ -1,17 +1,20 @@
 package ustc.sse.tims.util;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ustc.sse.tims.bean.Device;
 import ustc.sse.tims.bean.FingerPrint;
 import ustc.sse.tims.bean.IpAssignment;
-import ustc.sse.tims.config.SystemConfig;
+import ustc.sse.tims.service.DHCPService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +24,8 @@ import java.util.Map;
  * @date 2019/5/15-23:20
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:  处理指纹库查询相关操作
+ *
+ * 使用Jackson解析json
  */
 
 @Component
@@ -29,8 +34,7 @@ public class FingerPrintUtil {
     private ObjectMapper mapper = new ObjectMapper();
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-//    @Autowired
-//    SystemConfig config;
+    @Autowired DHCPService dhcpService;
 
 
     /**
@@ -73,15 +77,50 @@ public class FingerPrintUtil {
     }
 
     /**
-     * 解析json 结果
+     * 解析 json 结果  并进行持久化
      *
      * @param finger_str
-     * @return
+     * @return fingerPrint
      * @throws IOException
      */
     public FingerPrint resolveJson(String finger_str) throws IOException {
 
+        JsonNode node = mapper.readTree(finger_str);
+        String device_str = node.get("device").toString();
+
+
+        //Jackson解析json
         FingerPrint fingerPrint = mapper.readValue(finger_str, FingerPrint.class);
+        Device device = mapper.readValue(device_str,Device.class);
+
+        JsonNode device_node = mapper.readTree(device_str);
+        String parents_str = device_node.get("parents").toString();
+
+        JsonNode parents_node = mapper.readTree(parents_str);
+
+        int i= 0;
+
+        JsonNode parent_node;
+        List<Device> parents = new ArrayList<>();
+
+        while (true) {
+            parent_node = parents_node.get(i++);
+
+            if (parent_node == null) break;
+            else {
+                Device parent = mapper.readValue(parent_node.toString(), Device.class);
+                parents.add(parent);
+                //先将parents保存到数据库
+                dhcpService.SetDevice(parent);
+            }
+        }
+
+        device.setParents(parents);
+        //再 将 device 保存到数据库
+        dhcpService.SetDevice(device);
+        fingerPrint.setDevice(device);
+        //最后将fingerPrint 保存到数据库
+        dhcpService.setFingerPrint(fingerPrint);
 
         logger.debug("fingerPrint:"+fingerPrint.toString());
         return fingerPrint;

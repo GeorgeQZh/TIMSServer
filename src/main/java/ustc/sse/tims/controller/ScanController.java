@@ -43,6 +43,9 @@ public class ScanController implements CommandExecutorObserver {
         command =  new Command(code);
         ongoingCommands.add(0,command);
         executeCommand(command);
+        String html = command.getOutput().getText();
+        System.out.println("/ip"+html);
+        model.addAttribute("html",html);
         model.addAttribute("command", command);
         model.addAttribute("commands", ongoingCommands);
 

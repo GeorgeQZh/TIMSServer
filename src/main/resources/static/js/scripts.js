@@ -1,18 +1,18 @@
 
 jQuery(document).ready(function() {
 
-    /*
-        Fullscreen background
-    */
-    // $.backstretch([
-    //                 "classpath://static/img/backgrounds/2.jpg"
-	//               , "classpath://static/img/backgrounds/3.jpg"
-	//               , "classpath://static/img/backgrounds/1.jpg"
-	//              ], {duration: 3000, fade: 750});
 
-    /*
-        Form validation
-    */
+        // Fullscreen background
+		 //
+	     // $.backstretch([
+	     //                 "classpath://static/img/backgrounds/2.jpg"
+		 //               , "classpath://static/img/backgrounds/3.jpg"
+		 //               , "classpath://static/img/backgrounds/1.jpg"
+		 //             ], {duration: 3000, fade: 750});
+		 //
+		 //
+	     //    Form validation
+
     $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function() {
     	$(this).removeClass('input-error');
     });

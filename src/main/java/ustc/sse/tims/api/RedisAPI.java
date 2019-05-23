@@ -42,8 +42,8 @@ public class RedisAPI {
             redis.del(ip);
         }
         redis.set(ip, opt55);
-        //设置ttl=600s
-        redis.expire(ip,600);
+        //设置ttl=3600s
+        redis.expire(ip,3600);
         return "success";
     }
 

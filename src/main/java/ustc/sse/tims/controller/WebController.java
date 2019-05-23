@@ -61,7 +61,7 @@ public class WebController{
         model.addAttribute("ipAssignments", ipAssignments);
         return "management";}
 
-    @GetMapping("/map")
-    public String toMap(){return "map";}
+    @GetMapping("/table")
+    public String toMap(){return "table";}
 
 }

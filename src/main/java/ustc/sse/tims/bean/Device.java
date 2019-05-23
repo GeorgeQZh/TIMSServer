@@ -3,6 +3,7 @@ package ustc.sse.tims.bean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ZHGQ
@@ -13,24 +14,24 @@ import java.util.Date;
  * @Description:
  */
 public class Device {
-    private int id;
-    private String name;
-    private Date created_at;
-    private Date updated_at;
-    private int parent_id;
-    private String virtual_parent_id;
+
+    public Integer id;
+    public String name;
+    public Date created_at;
+    public Date updated_at;
+    public Integer parent_id;
+    public Integer virtual_parent_id;
+    public Integer child_devices_count;
+    public Integer child_virtual_devices_count;
+    public boolean can_be_more_precise;
     @JsonIgnore
-    private int child_devices_count;
-    private int child_virtual_devices_count;
-    private boolean can_be_more_precise;
-    private Device parents;
+    public List<Device> parents;
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,35 +59,35 @@ public class Device {
         this.updated_at = updated_at;
     }
 
-    public int getParent_id() {
+    public Integer getParent_id() {
         return parent_id;
     }
 
-    public void setParent_id(int parent_id) {
+    public void setParent_id(Integer parent_id) {
         this.parent_id = parent_id;
     }
 
-    public String getVirtual_parent_id() {
+    public Integer getVirtual_parent_id() {
         return virtual_parent_id;
     }
 
-    public void setVirtual_parent_id(String virtual_parent_id) {
+    public void setVirtual_parent_id(Integer virtual_parent_id) {
         this.virtual_parent_id = virtual_parent_id;
     }
 
-    public int getChile_decices_count() {
+    public Integer getChild_devices_count() {
         return child_devices_count;
     }
 
-    public void setChile_decices_count(int chile_decices_count) {
-        this.child_devices_count = chile_decices_count;
+    public void setChild_devices_count(Integer child_devices_count) {
+        this.child_devices_count = child_devices_count;
     }
 
-    public int getChild_virtual_devices_count() {
+    public Integer getChild_virtual_devices_count() {
         return child_virtual_devices_count;
     }
 
-    public void setChild_virtual_devices_count(int child_virtual_devices_count) {
+    public void setChild_virtual_devices_count(Integer child_virtual_devices_count) {
         this.child_virtual_devices_count = child_virtual_devices_count;
     }
 
@@ -98,15 +99,13 @@ public class Device {
         this.can_be_more_precise = can_be_more_precise;
     }
 
-    public Device getParents() {
+    public List<Device> getParents() {
         return parents;
     }
 
-    public void setParents(Device parents) {
+    public void setParents(List<Device> parents) {
         this.parents = parents;
     }
-
-
 
     @Override
     public String toString() {
@@ -115,9 +114,9 @@ public class Device {
                 ", name='" + name + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
-                ", parent_id='" + parent_id + '\'' +
-                ", virtual_parent_id='" + virtual_parent_id + '\'' +
-                ", chile_decices_count=" + child_devices_count +
+                ", parent_id=" + parent_id +
+                ", virtual_parent_id=" + virtual_parent_id +
+                ", child_devices_count=" + child_devices_count +
                 ", child_virtual_devices_count=" + child_virtual_devices_count +
                 ", can_be_more_precise=" + can_be_more_precise +
                 ", parents=" + parents +

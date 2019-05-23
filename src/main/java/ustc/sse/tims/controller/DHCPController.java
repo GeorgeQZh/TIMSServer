@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import redis.clients.jedis.Jedis;
 import ustc.sse.tims.api.RedisAPI;
+import ustc.sse.tims.bean.Device;
+import ustc.sse.tims.bean.FingerPrint;
 import ustc.sse.tims.bean.IpAssignment;
 import ustc.sse.tims.service.DHCPService;
 import ustc.sse.tims.util.FingerPrintUtil;
-import ustc.sse.tims.util.RedisUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,6 +42,8 @@ public class DHCPController {
     @Autowired
     FingerPrintUtil fingerPrintUtil;
 
+    ArrayList<IpAssignment> ipAssignments;
+
 
     @GetMapping("/dhcps")
     public String getDHCP(Model model) throws IOException {
@@ -49,14 +51,20 @@ public class DHCPController {
         //查询ip与option55缓存
         Map<String,String> ipOpts = RedisAPI.getIpOpts();
 
-        //todo 查询数据库 或 缓存
+        FingerPrint fp;
+        Map<String,String> ns_ipOpts = new HashMap<>();
+        //先 查询数据库 或 缓存
+        for(String ip : ipOpts.keySet()){
+            if(null != ( fp= dhcpService.getFingerPrint(ipOpts.get(ip)))){
+                Device dev = dhcpService.getDevice(fp.device.id);
+            }
+            else {
+                ns_ipOpts.put(ip,ipOpts.get(ip));
+            }
+        }
 
-
-        //调用在线API
-        ArrayList<IpAssignment> ipAssignments = fingerPrintUtil.getIpAssignments(ipOpts);
-
-
-        //todo 存储结果
+        //数据库中没有的 再调用在线API  ； 结果存储 在fpUtil中进行
+        ipAssignments = fingerPrintUtil.getIpAssignments(ns_ipOpts);
 
         model.addAttribute("ipAssignments",ipAssignments);
         return "dhcps";

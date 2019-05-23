@@ -60,10 +60,14 @@ public class TimsApplicationTests {
     @Test
     public void DHCPQuery() throws IOException {
 
-        Map<String,String> ipOpts = redisAPI.getIpOpts();
+//        Map<String,String> ipOpts = redisAPI.getIpOpts();
+
+        Map<String,String> map = new HashMap<>();
+        map.put("172.16.72.151","1,121,3,6,15,119,252,95,44,46");
+        map.put("172.16.72.152","1,33,3,6,15,26,28,51,58,59");
 
         FingerPrintUtil fingerPrintUtil =new FingerPrintUtil();
-        ArrayList<IpAssignment> ipAssignments = fingerPrintUtil.getIpAssignments(ipOpts);
+        ArrayList<IpAssignment> ipAssignments = fingerPrintUtil.getIpAssignments(map);
 
     }
 

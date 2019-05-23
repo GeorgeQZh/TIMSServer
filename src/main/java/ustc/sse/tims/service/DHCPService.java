@@ -1,5 +1,6 @@
 package ustc.sse.tims.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -23,19 +24,27 @@ public class DHCPService {
     @Autowired
     DHCPMapper dhcpMapper;
 
-    @Cacheable(cacheNames={"devs"},key="#{option55}")
-    public Device getDev(String option55){
-        Device dev = dhcpMapper.getDevByOpt55(option55);
+    @Cacheable(cacheNames={"devices"},key="#id")
+    public Device getDevice(Integer id){
+        Device dev = dhcpMapper.getDevById(id);
         return dev;
     }
 
+    @Cacheable(cacheNames = {"devices"},key="#dev.id")
+    public void SetDevice(Device dev){
+        dhcpMapper.setDev(dev);
+    }
 
-    @Cacheable(cacheNames={"fingerPrints"},key="#{option55}")
-    public FingerPrint qureyFingerPrint(String option55){
-        FingerPrint fp = dhcpMapper.getFingerPrintByOpt55(option55);
+
+    @Cacheable(cacheNames={"fingerPrints"},key="#opt55")
+    public FingerPrint getFingerPrint(String opt55){
+        FingerPrint fp = dhcpMapper.getFingerPrintByOpt55(opt55);
         return fp;
     }
 
 
-
+    @Cacheable(cacheNames = {"fingerPrints"})
+    public void setFingerPrint(FingerPrint fp){
+        dhcpMapper.setFingerPrintByOpt55(fp);
+    }
 }

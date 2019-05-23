@@ -21,7 +21,6 @@ public class TransInfoHtml {
 
     public static String transformToHtml(String xml) throws TransformerException{
 
-//        InputStream xsl = new URL("https://svn.nmap.org/nmap/docs/nmap.xsl").openStream();
         InputStream xsl = TransInfoHtml.class.getClassLoader().getResourceAsStream("nmap.xsl");
 
         StringWriter writer = new StringWriter();
@@ -32,6 +31,7 @@ public class TransInfoHtml {
 
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer trans = factory.newTransformer(xslDoc);
+        //解析xml
         trans.transform(xmlDoc, result);
 
         String outputString = writer.toString();

@@ -9,9 +9,11 @@ package ustc.sse.tims.bean;
  * @Description:
  */
 public class IpAssignment {
+
+    public String opt55;
     public String ip;
     public FingerPrint fingerPrint;
-    public int access;
+    public Integer access;
 
     public IpAssignment(){}
 
@@ -20,6 +22,14 @@ public class IpAssignment {
         this.fingerPrint =fingerPrint;
     }
 
+
+    public String getOpt55() {
+        return opt55;
+    }
+
+    public void setOpt55(String opt55) {
+        this.opt55 = opt55;
+    }
 
     public String getIp() {
         return ip;
@@ -40,8 +50,10 @@ public class IpAssignment {
     @Override
     public String toString() {
         return "IpAssignment{" +
-                "ip='" + ip + '\'' +
+                "opt55='" + opt55 + '\'' +
+                ", ip='" + ip + '\'' +
                 ", fingerPrint=" + fingerPrint +
+                ", access=" + access +
                 '}';
     }
 }

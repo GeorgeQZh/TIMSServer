@@ -11,11 +11,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @Description:
  */
 public class FingerPrint {
-    private int score;
+    private Integer score;
     private String version;
     public String device_name;
     @JsonIgnore
-    private Device device;
+    public Device device;
+    @JsonIgnore
+    public String opt55;
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public String getOpt55() {
+        return opt55;
+    }
+
+    public void setOpt55(String opt55) {
+        this.opt55 = opt55;
+    }
 
 
     public int getScore() {
@@ -54,10 +68,11 @@ public class FingerPrint {
     @Override
     public String toString() {
         return "FingerPrint{" +
-                "score='" + score + '\'' +
+                "score=" + score +
                 ", version='" + version + '\'' +
                 ", device_name='" + device_name + '\'' +
                 ", device=" + device +
+                ", opt55='" + opt55 + '\'' +
                 '}';
     }
 }

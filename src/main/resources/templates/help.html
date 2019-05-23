@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/logo-icon.png}">
     <title>TIMS-主动扫描</title>
 
-    <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
     <link th:href="@{css/style.css}" href="css/style.css" rel="stylesheet">
 
@@ -55,14 +55,24 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4>使用指南：</h4>
-                                <p>
+
+                                <br>
+
+                                    1、dhcp插件(dhcp_plugin_ipopts_redis.c)，当前仅适用于32位Ubuntu
+                                <br><br>
+
+                                    2、运行需要安装第三方库：pcap, hiredis
+                                <br><br>
+
+                                    3、需要运行redis及数据库服务
+                                <br><br>
+
+                                    4、可以在SystemConfig.properties中进行相关配置
+                                <br><br><br>
 
 
-
-                                </p>
-
-                                <h4>tel:</h4>
-                                <h4>email:</h4>
+                                <h4>tel:   000-00000000   </h4>
+                                <h4>email:   abc@ustc.edu.cn    </h4>
                             </div>
                         </div>
 

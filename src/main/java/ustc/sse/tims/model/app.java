@@ -1,7 +1,7 @@
 package ustc.sse.tims.model;
 
-
 import ustc.sse.tims.util.Constant;
+import ustc.sse.tims.util.RedisUtil;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,6 +41,7 @@ public class app {
         itemExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                RedisUtil.getJedis().close();
                 System.exit(0);  //退出
             }
         });
