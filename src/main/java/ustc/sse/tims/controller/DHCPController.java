@@ -57,14 +57,16 @@ public class DHCPController {
         for(String ip : ipOpts.keySet()){
             if(null != ( fp= dhcpService.getFingerPrint(ipOpts.get(ip)))){
                 Device dev = dhcpService.getDevice(fp.device.id);
+                IpAssignment ia = new IpAssignment(ip,fp);
+                ipAssignments.add(ia);
             }
             else {
                 ns_ipOpts.put(ip,ipOpts.get(ip));
             }
         }
 
-        //数据库中没有的 再调用在线API  ； 结果存储 在fpUtil中进行
-        ipAssignments = fingerPrintUtil.getIpAssignments(ns_ipOpts);
+        //数据库中没有的 再调用在线API ; 结果存储 在fpUtil中进行
+        ipAssignments.addAll(fingerPrintUtil.getIpAssignments(ns_ipOpts));
 
         model.addAttribute("ipAssignments",ipAssignments);
         return "dhcps";
