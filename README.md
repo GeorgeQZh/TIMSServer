@@ -1,7 +1,9 @@
 # 终端识别管理系统
 
 目前：
-DHCP 部分已整合Redis及数据库，修改了相应的查询逻辑，还有一些缓存上的问题
+DHCP 部分已整合Redis及数据库，修改了相应的查询逻辑
+
+数据库sql文件已上传,在resources\DataBase\MySQL目录下
 
 nmap 部分xml解析没有问题，现需要写Ajax查询NMAP指令的结果
 
@@ -26,6 +28,8 @@ nmap 部分xml解析没有问题，现需要写Ajax查询NMAP指令的结果
 9、java操作redis采用了Jedis
 
 10、需要在中作相应的配置修改SystemConfig.properties
+
+
 
 
 

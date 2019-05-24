@@ -2,8 +2,8 @@ package ustc.sse.tims;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import ustc.sse.tims.excutor.CommandExecutorImpl;
+import ustc.sse.tims.model.AppIconMenu;
 import ustc.sse.tims.model.Command;
-import ustc.sse.tims.model.app;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class TIMSLoader {
                 Objects.requireNonNull(TIMSLoader.class.getClassLoader().getResource(ICON_PATH)));// 托盘图标
 
         //传入app的popupMenu右键菜单
-        icon = new TrayIcon(trayImg.getImage(), "TIMS-设备识别管理系统", app.getMenu());
+        icon = new TrayIcon(trayImg.getImage(), "TIMS-设备识别管理系统", AppIconMenu.getMenu());
         icon.setImageAutoSize(true);
         try {
 

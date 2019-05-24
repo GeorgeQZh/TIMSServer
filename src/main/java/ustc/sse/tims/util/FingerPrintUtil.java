@@ -25,7 +25,7 @@ import java.util.Map;
  * @Copyright: (c) 2019 USTC. All rights reserved.
  * @Description:  处理指纹库查询相关操作
  *
- * 使用Jackson解析json
+ *          使用Jackson解析json
  */
 
 @Component
@@ -61,13 +61,16 @@ public class FingerPrintUtil {
      * @return 返回分配情况 IpAssignments 列表
      * @throws IOException
      */
-    public ArrayList<IpAssignment> getIpAssignments (Map<String,String> ip_opts) throws IOException {
+    public ArrayList<IpAssignment> getIpAssignments(Map<String, String> ip_opts) throws IOException {
 
         ArrayList <IpAssignment> ipAssignments = new ArrayList<>();
         for(String ip: ip_opts.keySet()){
-            String option55 = ip_opts.get(ip);
-            String fp_str = getFingerPrintByOpt55(option55);
+            String opt55 = ip_opts.get(ip);
+            String fp_str = getFingerPrintByOpt55(opt55);
             FingerPrint fingerPrint = resolveJson(fp_str);
+
+            //API查询出来的没有该字段，需设置！！
+            fingerPrint.setOpt55(opt55);
 
             logger.debug("fp:"+fp_str);
             IpAssignment ipAssignment = new IpAssignment(ip,fingerPrint);
@@ -75,6 +78,7 @@ public class FingerPrintUtil {
         }
         return ipAssignments;
     }
+
 
     /**
      * 解析 json 结果  并进行持久化
@@ -87,7 +91,6 @@ public class FingerPrintUtil {
 
         JsonNode node = mapper.readTree(finger_str);
         String device_str = node.get("device").toString();
-
 
         //Jackson解析json
         FingerPrint fingerPrint = mapper.readValue(finger_str, FingerPrint.class);
@@ -110,17 +113,11 @@ public class FingerPrintUtil {
             else {
                 Device parent = mapper.readValue(parent_node.toString(), Device.class);
                 parents.add(parent);
-                //先将parents保存到数据库
-                dhcpService.SetDevice(parent);
             }
         }
 
         device.setParents(parents);
-        //再 将 device 保存到数据库
-        dhcpService.SetDevice(device);
         fingerPrint.setDevice(device);
-        //最后将fingerPrint 保存到数据库
-        dhcpService.setFingerPrint(fingerPrint);
 
         logger.debug("fingerPrint:"+fingerPrint.toString());
         return fingerPrint;

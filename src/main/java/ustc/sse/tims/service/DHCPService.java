@@ -24,27 +24,25 @@ public class DHCPService {
     @Autowired
     DHCPMapper dhcpMapper;
 
-    @Cacheable(cacheNames={"devices"},key="#id")
+    @Cacheable(cacheNames={"devices"})
     public Device getDevice(Integer id){
-        Device dev = dhcpMapper.getDevById(id);
-        return dev;
+        return dhcpMapper.getDevById(id);
     }
 
-    @Cacheable(cacheNames = {"devices"},key="#dev.id")
-    public void SetDevice(Device dev){
+    @Cacheable(cacheNames = {"devices"})
+    public void SetDevice(@Param("dev") Device dev){
         dhcpMapper.setDev(dev);
     }
 
 
-    @Cacheable(cacheNames={"fingerPrints"},key="#opt55")
+    @Cacheable(cacheNames={"fingerPrints"})
     public FingerPrint getFingerPrint(String opt55){
-        FingerPrint fp = dhcpMapper.getFingerPrintByOpt55(opt55);
-        return fp;
+        return dhcpMapper.getFingerPrintByOpt55(opt55);
     }
 
 
     @Cacheable(cacheNames = {"fingerPrints"})
-    public void setFingerPrint(FingerPrint fp){
+    public void setFingerPrint( FingerPrint fp){
         dhcpMapper.setFingerPrintByOpt55(fp);
     }
 }

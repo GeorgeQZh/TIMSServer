@@ -25,14 +25,12 @@ spring:
 #    maxPoolPreparedStatementPerConnectionSize: 20
 #    useGlobalDataSourceStat: true
 #    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-##    schema:
-##      - classpath:sql/department.sql
-##      - classpath:sql/employee.sql
 
 
-
+#redis缓存配置
   redis:
-    host: 192.168.1.102
+    database: 1
+    host: 172.16.123.185
     port: 6379
     timeout: 3000
 

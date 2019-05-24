@@ -23,7 +23,7 @@ import java.net.URL;
  * 用java.awt创建一个任务栏图标
  */
 
-public class app {
+public class AppIconMenu {
 
     private static PopupMenu popupMenu = new PopupMenu();
 
